@@ -2,95 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 230 25% 8%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 230 25% 12%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 230 25% 12%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 230 25% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 320 100% 60%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 230 20% 18%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 150 100% 50%;
+    --accent-foreground: 230 25% 8%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 230 20% 20%;
+    --input: 230 20% 20%;
+    --ring: 180 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Game specific colors */
+    --bubble-cyan: 180 100% 50%;
+    --bubble-pink: 320 100% 60%;
+    --bubble-green: 150 100% 50%;
+    --bubble-yellow: 45 100% 60%;
+    --bubble-purple: 270 100% 65%;
+
+    /* Glow effects */
+    --glow-cyan: 0 0 20px hsl(180 100% 50% / 0.6), 0 0 40px hsl(180 100% 50% / 0.3);
+    --glow-pink: 0 0 20px hsl(320 100% 60% / 0.6), 0 0 40px hsl(320 100% 60% / 0.3);
+    --glow-green: 0 0 20px hsl(150 100% 50% / 0.6), 0 0 40px hsl(150 100% 50% / 0.3);
+    --glow-yellow: 0 0 20px hsl(45 100% 60% / 0.6), 0 0 40px hsl(45 100% 60% / 0.3);
+    --glow-purple: 0 0 20px hsl(270 100% 65% / 0.6), 0 0 40px hsl(270 100% 65% / 0.3);
+
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Inter', sans-serif;
   }
 }
 
@@ -101,5 +62,223 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .game-container {
+    @apply min-h-screen relative overflow-hidden;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--background)) 0%,
+      hsl(230 30% 12%) 50%,
+      hsl(250 25% 10%) 100%
+    );
+  }
+
+  .bubble {
+    @apply absolute rounded-full flex items-center justify-center font-bold cursor-default select-none;
+    font-family: var(--font-display);
+    animation: float var(--bubble-duration, 2s) ease-in-out forwards,
+               pulse 0.5s ease-in-out infinite alternate;
+  }
+
+  .bubble-cyan {
+    background: linear-gradient(135deg, hsl(var(--bubble-cyan)) 0%, hsl(190 100% 40%) 100%);
+    box-shadow: var(--glow-cyan);
+    color: hsl(var(--background));
+  }
+
+  .bubble-pink {
+    background: linear-gradient(135deg, hsl(var(--bubble-pink)) 0%, hsl(340 100% 50%) 100%);
+    box-shadow: var(--glow-pink);
+    color: hsl(var(--background));
+  }
+
+  .bubble-green {
+    background: linear-gradient(135deg, hsl(var(--bubble-green)) 0%, hsl(160 100% 40%) 100%);
+    box-shadow: var(--glow-green);
+    color: hsl(var(--background));
+  }
+
+  .bubble-yellow {
+    background: linear-gradient(135deg, hsl(var(--bubble-yellow)) 0%, hsl(35 100% 50%) 100%);
+    box-shadow: var(--glow-yellow);
+    color: hsl(var(--background));
+  }
+
+  .bubble-purple {
+    background: linear-gradient(135deg, hsl(var(--bubble-purple)) 0%, hsl(280 100% 55%) 100%);
+    box-shadow: var(--glow-purple);
+    color: hsl(var(--foreground));
+  }
+
+  .bubble-pop {
+    animation: pop 0.3s ease-out forwards !important;
+  }
+
+  .bubble-fade {
+    animation: fade-out 0.3s ease-out forwards !important;
+  }
+
+  .game-hud {
+    @apply fixed top-0 left-0 right-0 z-50;
+    background: linear-gradient(
+      180deg,
+      hsl(var(--background) / 0.95) 0%,
+      hsl(var(--background) / 0.8) 70%,
+      transparent 100%
+    );
+    backdrop-filter: blur(10px);
+  }
+
+  .game-controls {
+    @apply fixed bottom-0 left-0 right-0 z-50 p-4;
+    background: linear-gradient(
+      0deg,
+      hsl(var(--background) / 0.95) 0%,
+      hsl(var(--background) / 0.8) 70%,
+      transparent 100%
+    );
+    backdrop-filter: blur(10px);
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
+  }
+
+  .glass-panel {
+    @apply rounded-xl border border-border/50;
+    background: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(12px);
+  }
+
+  .progress-bar {
+    @apply h-2 rounded-full overflow-hidden;
+    background: hsl(var(--muted));
+  }
+
+  .progress-fill {
+    @apply h-full rounded-full transition-all duration-300;
+    background: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+  }
+
+  .btn-game {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200;
+    font-family: var(--font-display);
+  }
+
+  .btn-primary {
+    @apply btn-game text-primary-foreground;
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(190 100% 40%) 100%);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.6);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    @apply btn-game border-2;
+    border-color: hsl(var(--secondary));
+    color: hsl(var(--secondary));
+  }
+
+  .btn-secondary:hover {
+    background: hsl(var(--secondary) / 0.1);
+    box-shadow: 0 0 20px hsl(var(--secondary) / 0.3);
+  }
+
+  .select-game {
+    @apply px-4 py-2 rounded-lg border border-border bg-card text-foreground;
+    font-family: var(--font-display);
+  }
+
+  .stat-card {
+    @apply glass-panel p-4 text-center;
+  }
+
+  .stat-value {
+    @apply text-2xl md:text-3xl font-bold;
+    font-family: var(--font-display);
+  }
+
+  .stat-label {
+    @apply text-sm text-muted-foreground uppercase tracking-wider mt-1;
+  }
+}
+
+@keyframes float {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(0);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1) translateY(-20px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) translateY(-30px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
 }
